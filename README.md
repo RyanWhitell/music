@@ -6,7 +6,6 @@
 * [Music Theory in 16 Minutes](https://www.youtube.com/watch?v=_eKTOMhpy2w)
 
 ## Bass
-* [Bass Google Doc](https://docs.google.com/document/d/1MkTE324f0Pxko7OjKj6JMKu2NE8nY02ErynA8p7qDW0/edit#heading=h.lwjxqnxa9i1k)
 * [Study Bass](https://www.studybass.com/study-guide/)
 
 # How to Setup
