@@ -1,3 +1,5 @@
+from helpers import sf_conv
+
 alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
 notes_basic = [
@@ -45,6 +47,35 @@ intervals = [
     ['M7', 'd8'],  # Major seventh    Diminished octave
     ['P8', 'A7'],  # Perfect octave   Augmented seventh
 ]
+
+interval_names = {
+    'P1': 'Perfect unison',
+    'd2': 'Diminished second',
+    'm2': 'Minor second',
+    'A1': 'Augmented unison',
+    'M2': 'Major second',
+    'd3': 'Diminished third',
+    'm3': 'Minor third',
+    'A2': 'Augmented second',
+    'M3': 'Major third',
+    'd4': 'Diminished fourth',
+    'P4': 'Perfect fourth',
+    'A3': 'Augmented third',
+    'd5': 'Diminished fifth',
+    'A4': 'Augmented fourth',
+    'P5': 'Perfect fifth',
+    'd6': 'Diminished sixth',
+    'm6': 'Minor sixth',
+    'A5': 'Augmented fifth',
+    'M6': 'Major sixth',
+    'd7': 'Diminished seventh',
+    'm7': 'Minor seventh',
+    'A6': 'Augmented sixth',
+    'M7': 'Major seventh',
+    'd8': 'Diminished octave',
+    'P8': 'Perfect octave',
+    'A7': 'Augmented seventh'
+}
 
 def find_note_index(scale, search_note):
     ''' Given a scale, find the index of a particular note '''
@@ -101,9 +132,20 @@ def make_intervals_standard(key):
 
     return labels
 
+def print_intervals_standard(key):
+    intervals_dictionary = make_intervals_standard(key)
+    for interval in intervals:
+        for eq in interval:
+            print(f'{interval_names[eq]}:\t\t{sf_conv(intervals_dictionary[eq])}')
+
 def make_formula(formula, labeled):
     '''
     Given a comma-separated interval formula, and a set of labeled
     notes in a key, return the notes of the formula.
     '''
     return [labeled[x] for x in formula.split(',')]
+
+def print_scale(pattern_of_intervals, key):
+    intervals_dictionary = make_intervals_standard(key)
+    scale = make_formula(pattern_of_intervals, intervals_dictionary)
+    print(' '.join([sf_conv(note) for note in scale]))
