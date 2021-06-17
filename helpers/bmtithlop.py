@@ -1,4 +1,4 @@
-from helpers import sf_conv
+from .general import sf_conv
 
 alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 

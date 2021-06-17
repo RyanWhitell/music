@@ -7,6 +7,7 @@
 
 ## Bass
 * [Study Bass](https://www.studybass.com/study-guide/)
+* [Bass Music Notation](https://www.halleonard.com/bin/musicNotationBass.pdf)
 
 # How to Setup
 1. Install [Conda](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html)
