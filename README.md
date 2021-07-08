@@ -9,6 +9,12 @@
 * [Study Bass](https://www.studybass.com/study-guide/)
 * [Bass Music Notation](https://www.halleonard.com/bin/musicNotationBass.pdf)
 
+## LilyPond
+* [LilyPond](http://lilypond.org/)
+* [LilyBin](http://lilybin.com/)
+* [MacPorts](https://www.macports.org/install.php)
+* [Frescobaldi](https://github.com/frescobaldi/frescobaldi/wiki/How-to-install-Frescobaldi-on-Mac-OS-X)
+
 # How to Setup
 1. Install [Conda](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html)
 1. Install jupypter

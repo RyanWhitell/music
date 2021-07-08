@@ -1,8 +1,28 @@
-def sf_conv(text):
-    '''
-    Convert b and # characters to unicode flat and sharp symbols.
-    '''
-    return text.replace('b', '\u266d').replace('#', '\u266f')
+def sf_conv(note):
+    """
+        Convert b and # characters to unicode flat and sharp symbols.
+    """
+    new_note = ''
+    
+    for i, char in enumerate(note):
+        if i == 0:
+            new_note += char
+        else:
+            new_note += char.replace('b', '\u266d').replace('#', '\u266f')
+    return new_note
+
+def lily_conv(note):
+    """
+        Converts bmtithlop notes to lilypond notation.
+    """
+    new_note = ''
+    
+    for i, char in enumerate(note):
+        if i == 0:
+            new_note += char.lower()
+        else:
+            new_note += char.replace('b', 'f').replace('#', 's').lower()
+    return new_note
 
 def pprint_notes_eqs(note_list):
     '''
@@ -10,7 +30,6 @@ def pprint_notes_eqs(note_list):
     and converting the sharps and flats.
     '''
     return sf_conv('|'.join(note_list))
-
 
 def get_common_eq(note_list):
     '''

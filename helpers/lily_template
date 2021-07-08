@@ -1,0 +1,37 @@
+\version "2.20.0"
+\language "english"
+
+\header {
+  title = "KEY_SONG_TITLE"
+  subtitle = "KEY_ARTIST"
+}
+
+global = {
+  \key KEY_KEY_TONIC KEY_KEY_MODE
+  \time KEY_TIME_SIGNATURE
+  \tempo KEY_TEMPO
+}
+
+chordNames = \chordmode {
+  \global
+  KEY_CHORDS
+}
+
+electricBass = {
+  \global
+  KEY_BASS
+}
+
+electricBassPart = \new Staff \with {
+  midiInstrument = "electric bass (finger)"
+  % instrumentName = "Electric bass"
+} { \clef "bass_8" \electricBass }
+
+\score {
+  <<
+    \new ChordNames \chordNames
+    \electricBassPart
+  >>
+  \layout { }
+  \midi { }
+}
