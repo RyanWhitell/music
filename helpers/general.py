@@ -1,3 +1,7 @@
+from IPython.display import IFrame
+from IPython.display import Audio 
+from IPython.core.display import display
+
 def sf_conv(note):
     """
         Convert b and # characters to unicode flat and sharp symbols.
@@ -50,3 +54,9 @@ def pprint_notes_common(note_list):
     converting the sharps and flats.
     '''
     return sf_conv(get_common_eq(note_list))
+
+def play_song(song_name):
+    Audio(f'{song_name}.mp3')
+    
+def show_song(song_name):
+    IFrame(f'./{song_name}.pdf', width=1340, height=1960)

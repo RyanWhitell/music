@@ -1,10 +1,5 @@
 ####### Lilypond File #######
 def create_lily(title, artist, key_tonic, key_mode, time_signature, tempo, chords, bass):
-    chord_bars = chords.count('\n')
-    bass_bars = bass.count('\n')
-    if bass_bars != chord_bars:
-        raise ValueError(f"Bass ({bass_bars}) and Chord ({chord_bars}) measures are not equal!")
-    
     KEY_SONG_TITLE = "KEY_SONG_TITLE"
     KEY_ARTIST = "KEY_ARTIST"
     KEY_KEY_TONIC = "KEY_KEY_TONIC"
@@ -29,7 +24,7 @@ def create_lily(title, artist, key_tonic, key_mode, time_signature, tempo, chord
         text_file.write(template)
         
 ####### Measures #######
-def join_parts(*args):
+def join_chords(*args):
     """
         Joins the pitches of many strings into a 
         single string.
@@ -39,8 +34,24 @@ def join_parts(*args):
         if isinstance(part, str):
             voice.append(part)
         else:
-            for _ in range(part[1]):
-                voice.append(part[0])
+            voice.append(f'\\repeat volta {part[1]} {{')
+            voice.append(part[0])
+            voice.append('}')
+    return '\n  '.join(voice)
+
+def join_bass(*args):
+    """
+        Joins the pitches of many strings into a 
+        single string.
+    """
+    voice = []
+    for part in args:
+        if isinstance(part, str):
+            voice.append(part)
+        else:
+            voice.append(f'\\repeat volta {part[1]} {{ ')
+            voice.append(part[0])
+            voice.append(f'\\mark "{part[1]}x" }}')
     return '\n  '.join(voice)
 
 def combine_bars(*args):
@@ -53,9 +64,15 @@ def combine_bars(*args):
 ####### Notes and Articulation #######
 def legato_slide(pitch_to):
     """
-        legato slide: Strike the first note and
+        Legato slide: Strike the first note and
         then slide the same fret-hand finger up or
         down to the second note. The second note
         is not struck.
     """
     return f'(\glissando {pitch_to})'
+
+def staccato(pitch):
+    """
+        Staccato: Mute the note right after playing.
+    """
+    return f'{pitch}\staccato'

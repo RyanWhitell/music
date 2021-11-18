@@ -76,7 +76,7 @@ def show_lilly_bass_scale(tones, tonic, mode):
     }
     
     # If the scale starts anywhere on c or d we start one octave up
-    if ('c' in lily_conv(tonic) or 'd' in lily_conv(tonic)):
+    if ('c' in lily_conv(tonic) or 'd' in lily_conv(tonic) or 'ef' in lily_conv(tonic)):
         start_octave = ''
     else: 
         start_octave = ','
@@ -92,10 +92,21 @@ def show_lilly_bass_scale(tones, tonic, mode):
     staff = abjad.Staff([voice], name="Staff")
     if mode != 'chromatic':
         abjad.attach(abjad.KeySignature(tonic, mode), staff[0][0])
-    abjad.show(staff)
+    abjad.show(abjad.LilyPondFile(items=["#(set-global-staff-size 48)", staff]))
     abjad.play(staff)
     
-
+def show_lilly_bass_line(tones, tonic='c', mode='chromatic'):
+    """
+        Prints the bass melody/line onto a bass clef
+    """
+    voice = abjad.Voice(tones, name="Voice")
+    abjad.attach(abjad.Clef('bass'), voice[0])
+    staff = abjad.Staff([voice], name="Staff")
+    if mode != 'chromatic':
+        abjad.attach(abjad.KeySignature(tonic, mode), staff[0][0])
+    abjad.show(abjad.LilyPondFile(items=["#(set-global-staff-size 48)", staff]))
+    abjad.play(staff)
+    
 def get_tones_from_intervals(pattern_of_intervals):
     """
         Takes a pattern of intervals and returns the 
@@ -150,3 +161,44 @@ def get_random_cof():
     get_bass_scale(SCALES['minor'], choice[1]['minor'], 'minor')
     if 'eq' in choice[1]:
         get_bass_scale(SCALES['major'], choice[1]['eq'], 'major')
+        
+        
+def replace_fret_number_with_symbol(string, notes):
+    for note in notes:
+        if isinstance(note, int):
+            fret_number = str(note)
+            replace_string = "●"
+        else:
+            fret_number = str(note[0])
+            replace_string = note[1]
+            
+        string = string.replace("-" + fret_number + "-", " " + replace_string + " ")
+        string = string.replace("|" + fret_number + "|", "|" + replace_string + "|")
+    
+    for note in range(1,21):
+        string = string.replace("-" + str(note) + "-", "---")
+        string = string.replace("|" + str(note) + "|", "|-|")
+
+    return string
+
+def make_bass_pattern(e, a, d, g):
+    G = replace_fret_number_with_symbol(
+        "G|---1---|---2---|---3---|--4--|--5--|--6--|--7--|--8--|--9--|--10--|-11-|-12-|-13-|-14-|-15-|16|17|18|19|20|",
+        g
+    )
+    D = replace_fret_number_with_symbol(
+        "D|---1---|---2---|---3---|--4--|--5--|--6--|--7--|--8--|--9--|--10--|-11-|-12-|-13-|-14-|-15-|16|17|18|19|20|",
+        d
+    )
+    A = replace_fret_number_with_symbol(
+        "A|---1---|---2---|---3---|--4--|--5--|--6--|--7--|--8--|--9--|--10--|-11-|-12-|-13-|-14-|-15-|16|17|18|19|20|",
+        a
+    )
+    E = replace_fret_number_with_symbol(
+        "E|---1---|---2---|---3---|--4--|--5--|--6--|--7--|--8--|--9--|--10--|-11-|-12-|-13-|-14-|-15-|16|17|18|19|20|",
+        e
+    )
+    F1= " |       |       |       |     |     |     |     |     |     |     |   | • |   |   |   | | | | | |"
+    F2= " |       |       |   •   |     |  •  |     |  •  |     |  •  |     |   |   |   |   | • | |•| |•| |"
+    F3= " |       |       |       |     |     |     |     |     |     |     |   | • |   |   |   | | | | | |"
+    print("\n".join([G, F1, D, F2, A, F3, E])) 
