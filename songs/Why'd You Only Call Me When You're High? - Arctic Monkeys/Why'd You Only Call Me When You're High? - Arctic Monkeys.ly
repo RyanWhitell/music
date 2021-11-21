@@ -35,17 +35,26 @@ electricBass = {
   fs,,4 r8 cs,8\staccato d,4 d,4
   b,,4 r8 cs,8\staccato b,,4 e,,4
   \mark "5x" }
-  \repeat volta 2 { 
   fs,,4 r8 e,8\staccato d,4 d,4
   b,,4 r8 cs,8\staccato b,,4 e,,4
   fs,,4 r8 cs,8\staccato d,4 d,4
   b,,4 r8 cs,8\staccato b,,4 e,,4
-  \mark "2x" }
+  fs,,4 r8 e,8\staccato d,4 d,4
+  b,,4 r8 cs,8\staccato b,,4 e,,4
+  fs,,4 r8 cs,8\staccato d,4 d,4
   b,,4 r8 cs,8\staccato b,,4 b,,4
   \repeat volta 3 { 
-  b,,4. cs,8\staccato d,4 r8 e,8\staccato
+  b,,4. cs,8\staccato d,4. e,8\staccato
   fs,,8 fs,,8 fs,,8 e,,8 fs,,8 gs,,8 a,,8 cs,8
   \mark "3x" }
+  b,,4. cs,8\staccato d,4. e,8\staccato
+  cs,1
+  cs,8 r2..
+  \repeat volta 7 { 
+  d,8 d,8 d,8 cs,8 d,8 e,8 d,8 cs,8
+  fs,,8 fs,,8 fs,,8 e,,8 fs,,8 a,,8 b,,8 cs,8
+  \mark "7x" }
+  d,8 d,8 d,8 cs,8 d,8 e,8 d,8 cs,8
 }
 
 electricBassPart = \new Staff \with {
